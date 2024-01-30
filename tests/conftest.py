@@ -1,13 +1,18 @@
+import allure
 import pytest
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service as ChromeService
 from webdriver_manager.chrome import ChromeDriverManager
+from selenium.webdriver.chrome.options import Options
 
 
-@pytest.fixture(scope='function')
+@allure.step("Открыть и закрыть браузер")
+@pytest.fixture()
 def driver():
-    #driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()))
-    driver = webdriver.Chrome()
-    driver.maximize_window()
+    options = Options()
+    options.page_load_strategy = 'eager'  # позволяет не ждать полной загрузки сайта и сократить время на прогон теста
+    driver = webdriver.Chrome(options=options, service=ChromeService(ChromeDriverManager().install()))
     yield driver
     driver.quit()
+
+
