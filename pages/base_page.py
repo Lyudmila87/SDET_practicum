@@ -41,3 +41,11 @@ class BasePage:
 
         new_locator = locator_path[1].format(value)
         return locator_path[0], new_locator
+
+    @allure.step("Скроллить до указанного элемента")
+    def go_to_element(self, element):
+        self._driver.execute_script("arguments[0].scrollIntoView();", element)
+
+    def click_on_element(self, element):
+        self._driver.execute_script("arguments[0].click();", element)
+

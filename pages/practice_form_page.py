@@ -40,13 +40,14 @@ class PracticeFormPage(BasePage):
         self.element_is_visible(self.EMAIL).send_keys(user_info.email)
         self.element_is_clickable(self.change_locator(self.GENDER, user_info.gender)).click()
         self.element_is_visible(self.MOBILE).send_keys(user_info.mobile)
+        self.go_to_element(self.element_is_clickable(self.SUBMIT_BUTTON))
         self.fill_calendar(user_info)
         self.fill_subjects(user_info)
         self.fill_hobbies(user_info)
         self.element_is_visible(self.UPLOAD_PICTURE).send_keys(user_info.path_to_file)
         self.element_is_visible(self.CURRENT_ADDRESS).send_keys(user_info.current_address)
         self.fill_state_and_city(user_info)
-        self.element_is_clickable(self.SUBMIT_BUTTON).click()
+        self.click_on_element(self.element_is_clickable(self.SUBMIT_BUTTON))
 
     @allure.step("Заполнить поле датой из выпадающего календарика")
     def fill_calendar(self, user_info: User):

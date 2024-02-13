@@ -10,6 +10,7 @@ from selenium.webdriver.chrome.options import Options
 @pytest.fixture()
 def driver():
     options = Options()
+    options.add_argument("--window-size=1366,768")
     options.page_load_strategy = 'eager'  # позволяет не ждать полной загрузки сайта и сократить время на прогон теста
     driver = webdriver.Chrome(options=options, service=ChromeService(ChromeDriverManager().install()))
     yield driver
